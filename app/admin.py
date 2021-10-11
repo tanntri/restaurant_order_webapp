@@ -120,7 +120,7 @@ def register():
         hashed_and_salted_pwd = generate_password_hash(  # encrypt password using hash and salt
             form.password.data,  # use password inputted in the form
             method='pbkdf2:sha256',  # use sha256 method to encrypt password
-            salt_length=100  # how many times salting the password
+            salt_length=5  # how many times salting the password
         )
         new_staff = models.Staff(  # create new user
             email=form.email.data,  # use email inputted in the form
