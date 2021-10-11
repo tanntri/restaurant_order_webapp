@@ -8,8 +8,7 @@ class Staff(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, nullable=False,
                       unique=True)  # create email column
-    password = db.Column(db.String(100),
-                         nullable=False)  # cerate password column
+    password = db.Column(db.String(), nullable=False)  # cerate password column
 
 
 class Menu(db.Model):
