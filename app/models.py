@@ -6,9 +6,9 @@ from sqlalchemy.orm import relationship, backref
 class Staff(UserMixin, db.Model):
     __tablename__ = 'staff'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, nullable=False,
+    email = db.Column(db.Text, nullable=False,
                       unique=True)  # create email column
-    password = db.Column(db.String(), nullable=False)  # cerate password column
+    password = db.Column(db.Text, nullable=False)  # cerate password column
 
 
 class Menu(db.Model):
