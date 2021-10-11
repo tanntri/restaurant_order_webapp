@@ -1,6 +1,6 @@
 import qrcode
 
-APP_ORDER_URL = 'http://127.0.0.1:5000/order/'
+APP_ORDER_URL = 'https://restaurant-ordering-app.herokuapp.com/'
 TABLE_AMOUNT = 15
 
 #Creating an instance of qrcode

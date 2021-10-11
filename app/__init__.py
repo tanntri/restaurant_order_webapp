@@ -1,12 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # configure app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'uilk5654541324qewrf58e5sd45f'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 # configure database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///menu.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///menu.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",
+                                                       "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app, session_options={"autoflush": False})
 
