@@ -104,36 +104,37 @@ def current_orders():
 
 ######## register path. commented out because we don't need more admins #########
 
-# @app.route('/register', methods=["GET", "POST"])
-# def register():
-#     form = forms.RegisterForm()  # assign RegisterForm to form
-#     if form.validate_on_submit():  # if method == 'POST'
-#         if models.Staff.query.filter_by(email=form.email.data).first(
-#         ):  # query User table and see if email inputted in the form already existed
-#             # User already exists
-#             flash("You've already signed up with that email, log in instead!")
-#             #       )  # shows flash message
-#             print('user exists')
-#             return redirect(url_for('login'))  # redirect user to login page
 
-#         hashed_and_salted_pwd = generate_password_hash(  # encrypt password using hash and salt
-#             form.password.data,  # use password inputted in the form
-#             method='pbkdf2:sha256',  # use sha256 method to encrypt password
-#             salt_length=100  # how many times salting the password
-#         )
-#         new_staff = models.Staff(  # create new user
-#             email=form.email.data,  # use email inputted in the form
-#             password=hashed_and_salted_pwd  # use encrypted password
-#         )
-#         db.session.add(new_staff)  # add new user to the database
-#         db.session.commit()  # commit change in database
-#         login_user(new_staff)  # login user
-#         return redirect(
-#             url_for('admin_menus', is_loggedin=current_user.is_authenticated)
-#         )  # redirect to home page
-#     return render_template("admin/register.html",
-#                            is_loggedin=current_user.is_authenticated,
-#                            form=form)  # if method is GET, then render the page
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    form = forms.RegisterForm()  # assign RegisterForm to form
+    if form.validate_on_submit():  # if method == 'POST'
+        if models.Staff.query.filter_by(email=form.email.data).first(
+        ):  # query User table and see if email inputted in the form already existed
+            # User already exists
+            flash("You've already signed up with that email, log in instead!")
+            #       )  # shows flash message
+            print('user exists')
+            return redirect(url_for('login'))  # redirect user to login page
+
+        hashed_and_salted_pwd = generate_password_hash(  # encrypt password using hash and salt
+            form.password.data,  # use password inputted in the form
+            method='pbkdf2:sha256',  # use sha256 method to encrypt password
+            salt_length=100  # how many times salting the password
+        )
+        new_staff = models.Staff(  # create new user
+            email=form.email.data,  # use email inputted in the form
+            password=hashed_and_salted_pwd  # use encrypted password
+        )
+        db.session.add(new_staff)  # add new user to the database
+        db.session.commit()  # commit change in database
+        login_user(new_staff)  # login user
+        return redirect(
+            url_for('admin_menus', is_loggedin=current_user.is_authenticated)
+        )  # redirect to home page
+    return render_template("admin/register.html",
+                           is_loggedin=current_user.is_authenticated,
+                           form=form)  # if method is GET, then render the page
 
 
 # login functionality
