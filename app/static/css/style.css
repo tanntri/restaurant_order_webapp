@@ -1,0 +1,173 @@
+/* span {
+    cursor: pointer;
+} */
+
+.number {
+    margin: 100px;
+    text-align: center;
+}
+
+.minus,
+.plus {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 8px 5px 8px 5px;
+    border: 1px solid #ddd;
+    /* display: inline-block; */
+    vertical-align: middle;
+    text-align: center;
+}
+
+#table-num {
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+
+/* input {
+    height: 34px;
+    width: 100px;
+    font-size: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+} */
+
+.outer-menu-info {
+    display: inline;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.menu-info {
+    /* display: inline-block; */
+    position: absolute;
+    top: 35%;
+    bottom: 35%;
+    left: 15%;
+    right: 15%;
+}
+
+.home-menu-info {
+    text-align: center;
+    padding: 30px;
+}
+
+.menu-amount {
+    text-align: center;
+    height: 34px;
+    width: 100px;
+    font-size: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+
+/*
+.navbar a {
+    color: #e6e6d3 !important;
+} */
+
+.menu_name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-custom {
+    background-color: #ee0808;
+}
+
+.navbar-custom a {
+    color: #eeeeee;
+}
+
+#order-btn {
+    margin-left: 80%;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.category-title {
+    margin-top: 50px;
+    padding-left: 50px;
+}
+
+#cart-page {
+    text-align: center;
+}
+
+.order-list {
+    margin-bottom: 20px;
+}
+
+#total-field {
+    margin-top: 50px;
+    text-align: middle;
+    /* padding-right: 13%; */
+}
+
+#total {
+    font-weight: bold;
+}
+
+#back-div {
+    text-align: middle;
+}
+
+.order-name,
+.order-amount,
+.order-table {
+    text-align: center;
+}
+
+.date-form {
+    text-align: center;
+}
+
+.transaction-header {
+    font-size: 20px;
+}
+
+#conclude-sales {
+    text-align: center;
+    /* font-size: 30px;
+    font-weight: bold; */
+    margin-bottom: 80px;
+    margin-top: 40px;
+}
+
+#subtotal-sales {
+    font-size: 20px;
+}
+
+#total-sales {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 980px) {
+    .category-title {
+        padding-left: 0;
+    }
+    #back-div {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    #confirm-div {
+        margin-bottom: 40px;
+    }
+    .outer-menu-info {
+        margin-bottom: 20px;
+    }
+}

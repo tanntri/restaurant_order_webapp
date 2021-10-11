@@ -1,0 +1,50 @@
+{% extends 'public/templates/public_template.html' %} {% block title %} Ordering Page {% endblock %} {% block main %}
+
+<div class="container">
+
+    <h2 class="text-lg-left text-center">Menu</h2>
+    <!-- form to make post request to function 'cart' -->
+    <form action="{{ url_for('cart') }}" method="POST">
+
+        <!-- loop through menus_lst which was passed from backend -->
+        <input type="hidden" name='table' value='{{ table }}'> {% for menu in menus_lst %}
+
+        <!-- display category name at the top of each category -->
+        <h3 class="text-lg-left text-center category-title">{{ menu[0]['category'] }}</h3>
+
+        <!-- loop through list of menu item of each category -->
+        {% for category in menu %}
+        <div class="row">
+            <div class="outer-menu-info col-lg-6 col-sm-12">
+                <div class="menu-info">
+
+                    <!-- display name, description, and price -->
+                    <p class='menu_name'>{{ category.name }}</p>
+                    <p>{{ category.description }}</p>
+                    <p>${{ category.price }}</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+                <!-- display amount field which allows customer to choose amount of each item they want to order -->
+                <div class="number">
+                    <span class="minus">-</span>
+                    <input class='menu-amount' name="{{ category.name }}" type="text" value="0">
+                    <span class="plus">+</span>
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+        <hr> {% endfor %}
+
+        <!-- order button when customer finishes ordering -->
+        <button id='order-btn' class='btn btn-primary' type='submit'>Order</button>
+    </form>
+</div>
+{% endblock %}
+
+
+
+</html>

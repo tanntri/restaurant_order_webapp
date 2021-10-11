@@ -1,0 +1,26 @@
+{% extends 'admin/templates/admin_template.html' %} {% block title %}Register{% endblock %} {% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+            <h1>Register</h1>
+
+            <form method="POST" action="/register">
+                {{ form.hidden_tag() }} {{ form.csrf_token }}
+                <div class="form-group m-5">
+                    {{form.email.label()}} {{form.email(class="form-control")}}
+                </div>
+                <div class="form-group m-5">
+                    {{form.password.label()}} {{form.password(class="form-control")}}
+                </div>
+                {{form.submit(class="btn-lg btn-primary m-5")}}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+</html>

@@ -1,0 +1,65 @@
+{% extends 'admin/templates/admin_template.html' %} {% block title %}Transactions{% endblock %} {% block main %}
+
+<div class='container'>
+    <form method="POST" action="">
+        <div class="form-group m-5 date-form">
+            <!-- render WTForms for date form -->
+            {{ form.csrf_token }} {{form.selected_date.label()}} {{ form.selected_date(class_='datepicker') }} {{ form.hidden_tag() }} {{form.submit(class="btn-lg btn-primary m-5")}}
+        </div>
+
+        <!-- set variable subtotal sales to be calculated and displayed at the end of the page -->
+        {% set subtotal_sales = namespace(value=0) %} {% set total_sales = namespace(value=0) %}
+
+        <!-- loop through all transactions made in the selected date -->
+        {% for orders in all_orders_this_date %}
+        <div class="card">
+            <div class="card-header order-table">
+                <!-- display table number and time of the transaction -->
+                <p class='transaction-header'>Table {{ orders[0]['table'] }} at {{ orders[0]['time'] }}</p>
+                <input form='TransactionForm' type="hidden" name='table' value='{{ orders[0]["table"] }}'>
+            </div>
+
+            <!-- loop through orders of that particular table/transaction -->
+            {% for order in orders %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class='row'>
+                        <!-- display order name and amount -->
+                        <div class='col-lg-6 order-name'>{{ order.name }}</div>
+                        <div class='col-lg-6 order-amount'>x{{ order.amount }}</div>
+                    </div>
+                </li>
+                {% endfor %}
+
+                <li class="list-group list-group-flush">
+                    <div class='row'>
+                        <div class='col-lg-12' style='text-align: center; padding: 15px 0px 0px 0px;'>
+                            <!-- display subtotal -->
+                            <p>Subtotal: ${{ orders[0]['subtotal'] }}</p>
+
+                            <!-- calculate subtotal of all sales -->
+                            {% set subtotal_sales.value = subtotal_sales.value + orders[0]['subtotal'] %}
+
+                            <!-- display total -->
+                            <p style='font-weight: bold;'>Total: ${{ orders[0]['total'] }}</p>
+                            {% set total_sales.value = total_sales.value + orders[0]['total'] %}
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <br>
+        <br> {% endfor %}
+
+        <div id='conclude-sales'>
+            <!-- display subtotal of all sales -->
+            <p id='subtotal-sales'>Subtotal Sales: ${{ "%.2f"|format(subtotal_sales.value) }}</p>
+            <!-- calculate and display total of all sales -->
+            <p id='total-sales'>Total Sales: ${{ "%.2f"|format(total_sales.value) }}</p>
+        </div>
+</div>
+
+{% endblock %}
+
+</html>

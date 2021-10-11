@@ -1,0 +1,23 @@
+{% extends 'admin/templates/admin_template.html' %} {% block title %}Admin Menus{% endblock %} {% block main %}
+
+<!-- loop through menus which was passed from backend -->
+{% for menu in menus %}
+
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-4'>
+            <!-- display menu name, description, and price -->
+            <p>{{ menu.name }}</p>
+            <p>{{ menu.description }} ${{ menu.price }}</p>
+        </div>
+        <div class='col-md-4'>
+            <!-- button to edit, delete menu item. linked to their respective functions -->
+            <p><a href="{{ url_for('edit_item', item_id=menu.id) }}">Edit</a></p>
+            <p><a href="{{ url_for('delete_item', item_id=menu.id) }}">Delete</a></p>
+        </div>
+    </div>
+    <hr>
+</div>
+{% endfor %} {% endblock %}
+
+</html>

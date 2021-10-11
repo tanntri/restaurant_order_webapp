@@ -1,0 +1,66 @@
+{% extends 'public/templates/public_template.html' %} {% block title %} Shopping Cart {% endblock %} {% block main %}
+
+<div class='container' id='cart-page'>
+    <!-- form to make POST request to confirm() funciton in the backend -->
+    <form id='confirmForm' action="{{ url_for('confirm') }}" method="POST"></form>
+
+    <!-- display table number which was passed from backend -->
+    <h2 id='table-num'>Table {{ table }}</h2>
+
+    <!-- loop through order list which was passed from backend -->
+    {% for order in order_list %}
+
+    <input type="hidden" name='{{ order["name"] }} table' value='{{ order["table"] }}' form='confirmForm'>
+
+    <div class='row order-list'>
+        <div class='col-lg-4'>
+            <!-- display order name -->
+            <p>{{ order['name'] }}</p>
+
+            <!-- hidden form to pass information via confirmForm -->
+            <input type="hidden" name='{{ order["name"] }}' value='{{ order["name"] }}' form='confirmForm'>
+        </div>
+        <div class='col-lg-4'>
+            <!-- display order price -->
+            <p>${{ order['price'] }}</p>
+        </div>
+        <div class='col-lg-4'>
+            <!-- display order amount -->
+            <p>x{{ order['amount'] }}</p>
+            <!-- hidden form to pass information via confirmForm -->
+            <input type="hidden" name='{{ order["name"] }} amount' value='{{ order["amount"] }}' form='confirmForm'>
+        </div>
+    </div>
+    <hr> {% endfor %}
+    <div id='total-field'>
+        <!-- display subtotal -->
+        <p>Subtotal: ${{ subtotal }}</p>
+
+        <!-- hidden form to pass information via confirmForm -->
+        <input type="hidden" name='subtotal' value='{{ subtotal }}' form='confirmForm'>
+
+        <!-- display total -->
+        <p id='total'>Total: ${{ total }}</p>
+
+        <!-- hidden form to pass information via confirmForm -->
+        <input type="hidden" name='total' value='{{ total }}' form='confirmForm'>
+        <div class='row'>
+            <div id='back-div' class='col-sm-6'>
+                <!-- back button, go back to order page when clicked -->
+                <button class='btn btn-secondary' onclick='goBack()'>Back</button>
+            </div>
+            <div id="confirm-div" class='col-sm-6'>
+                <!-- confirm button, submit order when customers are satisfied with what they want to order -->
+                <button class='btn btn-primary' type='submit' form='confirmForm'>Confirm</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+</html>

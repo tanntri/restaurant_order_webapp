@@ -1,0 +1,72 @@
+{% extends 'admin/templates/admin_template.html' %} {% block title %}Current Orders{% endblock %} {% block main %}
+<div class='container'>
+
+    <!-- form to make POST request to make_payment() function in the backend -->
+    <form action="{{ url_for('make_payment') }}" method='POST' id='TransactionForm'></form>
+
+    <!-- loop through tables_orders_list which was passed from the backend -->
+    {% for orders in tables_orders_list %}
+    <div class="card">
+        <div class="card-header order-table">
+            <!-- display table number -->
+            Table {{ orders[0]['table'] }}
+            <input form='TransactionForm' type="hidden" name='table' value='{{ orders[0]["table"] }}'>
+        </div>
+
+        <!-- set subtotal variable to calculate subtotal later -->
+        {% set subtotal = namespace(value=0) %}
+
+        <!-- loop through each order of each table -->
+        {% for order in orders %}
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class='row'>
+                    <!-- display name of the order -->
+                    <div class='col-lg-6 order-name'>{{ order.name }}</div>
+
+                    <!-- hidden input field to be passed via form -->
+                    <input form='TransactionForm' type="hidden" name='table {{ order.table }} {{ loop.index0 }}' value='{{ order.name }}'>
+                    <input form='TransactionForm' type="hidden" name='table {{ order.table }} {{ loop.index0 }} price' value='{{ order.price }}'>
+
+                    <!-- display order amount -->
+                    <div class='col-lg-6 order-amount'>x{{ order.amount }}</div>
+                    <!-- hidden input field to be passed via form -->
+                    <input form='TransactionForm' type="hidden" name='table {{ order.table }} {{ loop.index0 }} amount' value='{{ order.amount }}'>
+                </div>
+                <!-- keep adding price of each item to calculate subtotal -->
+                {% set subtotal.value = subtotal.value + (order.price * order.amount) %}
+            </li>
+            {% endfor %}
+
+            <li class="list-group list-group-flush">
+                <div class='row'>
+                    <div class='col-lg-12' style='text-align: center; padding: 15px 0px 0px 0px;'>
+                        <!-- display subtotal -->
+                        <p>Subtotal: ${{ "%.2f"|format(subtotal.value) }}</p>
+                        <input form='TransactionForm' type="hidden" name='table {{ orders[0]["table"] }} subtotal' value='{{ "%.2f"|format(subtotal.value) }}'>
+
+                        <!-- calculate value of total -->
+                        {% set total = namespace(value=subtotal.value + (subtotal.value * tax_rate)) %}
+
+                        <!-- display total -->
+                        <p style='font-weight: bold;'>Total: ${{ "%.2f"|format(total.value) }}</p>
+                        <input form='TransactionForm' type="hidden" name='table {{ orders[0]["table"] }} total' value='{{ "%.2f"|format(total.value) }}'>
+
+                        <!-- button to submit form. also contains table number as value to be used in the backend -->
+                        <button class='btn btn-primary' name='submit' value='{{ orders[0]["table"] }}' form='TransactionForm'>Paid</button>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <br>
+    <br>
+    <br> {% endfor %}
+    </form>
+</div>
+{% endblock %}
+
+</html>

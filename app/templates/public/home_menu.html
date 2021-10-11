@@ -1,0 +1,31 @@
+{% extends 'public/templates/public_template.html' %} {% block title %} Ordering Page {% endblock %} {% block main %}
+
+<div class="container">
+
+    <h2 class="text-lg-left text-center">Menu</h2>
+
+    <!-- loop through menus_lst which was passed from backend -->
+    {% for menu in menus_lst %}
+
+    <!-- display category name at the top of each category -->
+    <h3 class="text-lg-left text-center category-title">{{ menu[0]['category'] }}</h3>
+
+    <!-- loop through list of menu item of each category -->
+    {% for category in menu %}
+    <div>
+        <div class='home-menu-info'>
+            <!-- display name, description, and price -->
+            <p class='menu_name'>{{ category.name }}</p>
+            <p>{{ category.description }}</p>
+            <p>${{ category.price }}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+    <hr> {% endfor %}
+</div>
+{% endblock %}
+
+
+
+</html>
