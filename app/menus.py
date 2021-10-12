@@ -1,5 +1,5 @@
 from app import app, models, db
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 
 TAX_RATE = 0.0685
 
@@ -94,6 +94,7 @@ def cart():
 @app.route('/confirm', methods=["POST"])
 def confirm():
     menus = models.Menu.query.all()  # query through all the menu items
+    flash("Orders sent successfully")
     for menu in menus:  # loop through all menu items
         if request.form.get(menu.name,
                             False):  # if name of menu exists in order list

@@ -1,7 +1,10 @@
 {% extends 'public/templates/public_template.html' %} {% block title %} Ordering Page {% endblock %} {% block main %}
 
 <div class="container">
-
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <div style="position:absolute; left:50%;text-align: center;">
+        <p style='color:green;'>{{ message }}</p>
+    </div> {% endfor %} {% endif %} {% endwith %}
     <h2 class="text-lg-left text-center">Menu</h2>
     <!-- form to make post request to function 'cart' -->
     <form action="{{ url_for('cart') }}" method="POST">
