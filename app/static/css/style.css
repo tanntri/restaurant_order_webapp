@@ -45,12 +45,14 @@
 }
 
 .menu-info {
+    padding-left: 35px;
+    padding-right: 35px;
     /* display: inline-block; */
-    position: absolute;
+    /* position: absolute;
     top: 35%;
     bottom: 35%;
     left: 15%;
-    right: 15%;
+    right: 15%; */
 }
 
 .home-menu-info {
@@ -168,11 +170,11 @@
     #confirm-div {
         margin-bottom: 40px;
     }
-    .outer-menu-info {
+    /* .outer-menu-info {
         margin-bottom: 20px;
-    }
+    } */
     .number {
-        margin: 130px 50px 50px 50px;
+        margin: 20px 50px 50px 50px;
     }
     .menu-amount {
         width: 50px;
