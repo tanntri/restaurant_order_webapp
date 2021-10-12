@@ -43,12 +43,16 @@ def show_menu():
 # page to show menu without ordering function
 @app.route('/')
 def home():
+    if not show_menu():
+        return "Menu Empty"
     return render_template('public/home_menu.html', menus_lst=show_menu())
 
 
 # page to show menu with ordering function
 @app.route('/order/<int:table>')
 def order(table):
+    if not show_menu():
+        return "Menu Empty"
     return render_template('public/menus.html',
                            menus_lst=show_menu(),
                            table=table)
