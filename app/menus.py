@@ -6,53 +6,54 @@ TAX_RATE = 0.0685
 
 def show_menu():
     ''' funciton to get the list of menu items separated by category. Returns list of list '''
-    menus = models.Menu.query.all()  # query all menu items
-    appetizers = [menu for menu in menus if menu.category == 'Appetizer'
-                  ]  # list of menu items with category of Appetizer
-    soups = [menu for menu in menus if menu.category == 'Soup'
-             ]  # list of menu items with category of Soup
-    pizzas = [menu for menu in menus if menu.category == 'Pizza'
-              ]  # list of menu items with category of Pizza
-    pastas = [menu for menu in menus if menu.category == 'Pasta'
-              ]  # list of menu items with category of Pasta
-    rices = [menu for menu in menus if menu.category == 'Rice'
-             ]  # list of menu items with category of Rice
-    coffees = [menu for menu in menus if menu.category == 'Coffee'
-               ]  # list of menu items with category of Coffee
-    wines = [menu for menu in menus if menu.category == 'Wine'
-             ]  # list of menu items with category of Wine
-    desserts = [menu for menu in menus if menu.category == 'Dessert'
-                ]  # list of menu items with category of Dessert
-    beverages = [menu for menu in menus if menu.category == 'Beverage'
-                 ]  # list of menu items with category of Beverage
-    menus_lst = [
-        appetizers,
-        soups,
-        pizzas,
-        pastas,
-        rices,
-        desserts,
-        coffees,
-        wines,  # list of list of menu items separated by categories
-        beverages
-    ]
 
-    return menus_lst  # return list of list
+    try:
+        menus = models.Menu.query.all()  # query all menu items
+        appetizers = [menu for menu in menus if menu.category == 'Appetizer'
+                      ]  # list of menu items with category of Appetizer
+        soups = [menu for menu in menus if menu.category == 'Soup'
+                 ]  # list of menu items with category of Soup
+        pizzas = [menu for menu in menus if menu.category == 'Pizza'
+                  ]  # list of menu items with category of Pizza
+        pastas = [menu for menu in menus if menu.category == 'Pasta'
+                  ]  # list of menu items with category of Pasta
+        rices = [menu for menu in menus if menu.category == 'Rice'
+                 ]  # list of menu items with category of Rice
+        coffees = [menu for menu in menus if menu.category == 'Coffee'
+                   ]  # list of menu items with category of Coffee
+        wines = [menu for menu in menus if menu.category == 'Wine'
+                 ]  # list of menu items with category of Wine
+        desserts = [menu for menu in menus if menu.category == 'Dessert'
+                    ]  # list of menu items with category of Dessert
+        beverages = [menu for menu in menus if menu.category == 'Beverage'
+                     ]  # list of menu items with category of Beverage
+        menus_lst = [
+            appetizers,
+            soups,
+            pizzas,
+            pastas,
+            rices,
+            desserts,
+            coffees,
+            wines,  # list of list of menu items separated by categories
+            beverages
+        ]
+
+        return menus_lst  # return list of list
+
+    except:
+        return []
 
 
 # page to show menu without ordering function
 @app.route('/')
 def home():
-    if not show_menu():
-        return "Menu Empty"
     return render_template('public/home_menu.html', menus_lst=show_menu())
 
 
 # page to show menu with ordering function
 @app.route('/order/<int:table>')
 def order(table):
-    if not show_menu():
-        return "Menu Empty"
     return render_template('public/menus.html',
                            menus_lst=show_menu(),
                            table=table)
