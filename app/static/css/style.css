@@ -128,6 +128,10 @@
     text-align: middle;
 }
 
+.strike {
+    text-decoration: line-through;
+}
+
 .order-name,
 .order-amount,
 .order-table {

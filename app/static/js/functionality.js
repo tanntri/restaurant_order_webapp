@@ -21,3 +21,13 @@ $(document).ready(function() {
         return false;
     });
 });
+
+const ordersUls = document.querySelectorAll('.curr-order-lst')
+
+for (let orderUl of ordersUls) {
+    orderUl.addEventListener('click', (e) => {
+        e.target.classList.toggle('strike')
+        console.dir(e.target)
+        console.log(`${e.target} got clicked`)
+    })
+}
