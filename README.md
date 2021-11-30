@@ -4,6 +4,8 @@ This webapp intended function is to let customers scan QR code to access the men
 
 The video of brief demonstration on how the app works: https://youtu.be/ntHv-ZHK-14
 
+![alt text](https://github.com/tanntri/restaurant_order_webapp/blob/master/gif.gif "demonstration")
+
 The QRcode to try the customers' side of the app:
 
 ![alt text](https://github.com/tanntri/restaurant_order_webapp/blob/master/app/static/images/qrcode/qrcode1.png)
